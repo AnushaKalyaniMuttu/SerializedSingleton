@@ -1,0 +1,23 @@
+package com.example.demo;
+
+import java.io.Serializable;
+
+public class SerializedSingleton  implements Serializable {
+
+	private static SerializedSingleton instance;
+	
+	private SerializedSingleton() {
+		
+	}
+	public static SerializedSingleton getInstance() {
+		if(instance==null) {
+			instance=new SerializedSingleton();
+		}
+		return instance;
+	}
+	
+	//JVM will call this method during deserialization so we simply return the already created object
+	protected Object readResolve() {
+		return instance;
+	}
+}
